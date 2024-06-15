@@ -1,6 +1,6 @@
 const logger = require('../logger.js')
-
-
+const mongoose = require('mongoose')
+const videos  = require('../models/videos.model.js')
 /**
  * @method getChallenges get all the challenge videos
  * @param {*} req mandatory params: 
@@ -10,6 +10,7 @@ const logger = require('../logger.js')
 
 async function getChallenges(req,res){
     try{
+        
         res.status(200).json({
             status: "success",
             data: "hello world!!!!"
@@ -33,6 +34,7 @@ async function getChallenges(req,res){
 
 async function postChallenges(req,res){
     try{
+        let data = req.body.data;
         res.status(200).json({
             status: "success",
             message: "videos are posted successfully"

@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const logger = require('./logger.js')
-const challengeRoutes = require('./routes/challenges.routes.js')
+const challengeRoutes = require('./routes/challenge.route.js')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

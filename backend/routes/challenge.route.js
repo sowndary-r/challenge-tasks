@@ -8,15 +8,12 @@ const userInfoRoutes = require('../controllers/userInfo.controller.js')
 const router = express.Router(); 
 
 router
-  .route('/getAllChallenges')
-  .get(videoRoutes.getChallenges)
-
-router
-  .route('/uploadChallenges')
-  .post(videoRoutes.postChallenges)
+  .route('/challenges')
+  .post(videoRoutes.postChallenges) 
+  .get(videoRoutes.getChallenges);  
 
 router
   .route('/users')
-  .post(userInfoRoutes.insertChallengers)
+  .post(userInfoRoutes.insertChallengers); 
 
   module.exports = router;

@@ -1,6 +1,5 @@
 const logger = require('../logger.js')
-const mongoose = require('mongoose')
-const userInfo  = require('../models/userInfo.model.js')
+const { insertUserInfo }  = require('../models/userInfo.model.js')
 
 /**
  * @method getChallenges insert all the challengers
@@ -12,12 +11,12 @@ const userInfo  = require('../models/userInfo.model.js')
 async function insertChallengers(req,res){
     try{
         let challengers = req.body.challengers;
-        const documents = challengers.map((name)=>({
-           userName : name
-        }));
-
-        const resp = await userInfo.insertMany(documents);
-        logger.info("challengers are added successfully "+ resp)
+         for(let name of challengers){
+            let data = {
+                "userName" : name
+            };
+            await insertUserInfo(data);
+         }
         res.status(200).json({
             status: "success",
             message: "challengers are added successfully"
@@ -32,4 +31,6 @@ async function insertChallengers(req,res){
     }
 }
 
-module.exports = {insertChallengers}
+module.exports = {
+    insertChallengers
+}

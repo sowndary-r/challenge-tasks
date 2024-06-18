@@ -1,19 +1,29 @@
 const logger = require('../logger.js')
-const mongoose = require('mongoose')
-const videos  = require('../models/videos.model.js')
+const moment = require('moment-timezone')
+const { insertVideos, getVideos} = require('../models/videos.model.js')
+
 /**
  * @method getChallenges get all the challenge videos
- * @param {*} req mandatory params: 
+ * @param {*} req mandatory params: date
  * @param {*} res 
  * @returns 
  */
 
 async function getChallenges(req,res){
     try{
-        
+        let date = req.query.date;
+
+        if(!date){
+            res.status(500).json({
+                status: "Failure",
+                message: "dates are mandatory"
+              });
+        }
+        const formattedDate = moment(date).format('YYYY-MM-DD');
+        let data = await getVideos(formattedDate)
         res.status(200).json({
             status: "success",
-            data: "hello world!!!!"
+            data: data
           });
     }
     catch(err){
@@ -27,14 +37,24 @@ async function getChallenges(req,res){
 
 /**
  * @method postChallenges upload challenge videos
- * @param {*} req mandatory params: 
+ * @param {*} req mandatory params: userId,mame,video,uploadeddate
  * @param {*} res 
  * @returns 
  */
 
 async function postChallenges(req,res){
     try{
-        let data = req.body.data;
+        let {date, videos} = req.body;
+        const formattedDate = moment(date).format('YYYY-MM-DD');
+       for(let data of videos){
+        let document = {
+            "userId" : data.id,
+            "userName" : data.userName,
+            "video" : data.video,
+            "uploadedDate" : formattedDate
+        }
+         await insertVideos(document)
+       }
         res.status(200).json({
             status: "success",
             message: "videos are posted successfully"

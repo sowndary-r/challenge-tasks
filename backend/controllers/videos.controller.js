@@ -49,7 +49,6 @@ async function postChallenges(req,res){
        for(let data of videos){
         let document = {
             "userId" : data.id,
-            "userName" : data.userName,
             "video" : data.video,
             "uploadedDate" : formattedDate
         }

@@ -1,12 +1,13 @@
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors');
 const Sequelize = require('sequelize')
 const bodyParser = require('body-parser');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 const logger = require('./logger.js')
 const challengeRoutes = require('./routes/challenge.route.js')
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

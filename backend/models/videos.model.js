@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const userInfo = require('./userInfo.model.js')
 const dbUrl = 'mysql://root:root1234@localhost:3306/challenge';
 const sequelize = new Sequelize(dbUrl)
 const { QueryTypes, Op } = Sequelize; 
@@ -11,14 +12,13 @@ const Videos = sequelize.define('videos', {
 		primaryKey:true
    },
 	userId : Sequelize.INTEGER,
-    userName : Sequelize.STRING,
     video : Sequelize.STRING,
     date : Sequelize.DATE
 },{
 	tableName: 'videos',
 	timestamps: false 
 });
-
+//Videos.belongsTo(userInfo, {targetKey: 'id', foreignKey: 'userId'});
 module.exports = Videos;
 
 
@@ -34,7 +34,7 @@ async function insertVideos(data){
 }
 async function getVideos(date){
     try{
-        const resp = await sequelize.query(`SELECT * from videos v join userInfo i on i.id = v.userId where uploadedDate = :date`, { 
+        const resp = await sequelize.query(`SELECT u.id,u.userName,v.video,v.date from videos v join userInfo i on i.id = v.userId where uploadedDate = :date`, { 
 			logging: false,
 			plain: false, 
 			raw: false, 

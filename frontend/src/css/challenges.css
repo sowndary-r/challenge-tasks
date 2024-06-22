@@ -1,0 +1,56 @@
+.users-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.user-card {
+    flex: 1 0 calc(33.33% - 20px); /* Three cards per row with 20px gap */
+    max-width: calc(33.33% - 20px);
+    min-width: 250px; /* Minimum width for each card */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 350px; /* Fixed height for each card */
+    overflow: hidden;
+}
+
+.video-container {
+    position: relative;
+    padding-top: 56.25%; /* Aspect ratio 16:9 */
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.date-picker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.date-picker-container {
+    display: flex;
+    align-items: center;
+}
+
+.date-picker-container .react-datepicker-wrapper {
+    margin: 0 10px; /* Adjust the margin as needed */
+}
+.heading {
+    color: transparent; /* Make the text transparent */
+    background-image: linear-gradient(to right, #002ffff5, #107ca0); /* Red gradient */
+    background-clip: text; /* Clip the background to the text */
+    -webkit-background-clip: text; /* For Safari */
+    text-fill-color: transparent; /* Fill the text with the gradient */
+    padding: 30px; /* Padding */
+    text-align: center; /* Center text */
+  }

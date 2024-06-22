@@ -1,0 +1,78 @@
+.challenges-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.date-picker {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.date-picker-container {
+    margin: 0 10px;
+}
+
+.users-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    border: 30px;
+}
+
+.user-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-input h3 {
+    flex: 1;
+    margin-right: 50px;
+    padding: 30px;
+    width : 300px;
+    border-right: 100px;
+
+}
+
+.user-input input {
+    flex: 2;
+}
+
+.invalid {
+    border-color: red;
+}
+
+.error-message {
+    color: red;
+    margin-left: 10px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-image: linear-gradient(to right, #002ffff5, #48b9df);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-image: linear-gradient(to right, #48b9df, #002ffff5);
+}
+input{
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); 
+}
+.heading {
+    color: transparent; /* Make the text transparent */
+    background-image: linear-gradient(to right, #002ffff5, #107ca0); /* Red gradient */
+    background-clip: text; /* Clip the background to the text */
+    -webkit-background-clip: text; /* For Safari */
+    text-fill-color: transparent; /* Fill the text with the gradient */
+    padding: 30px; /* Padding */
+    text-align: center; /* Center text */
+  }

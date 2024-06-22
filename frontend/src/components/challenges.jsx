@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import {getAllChallengers, getAllChallenges} from '../api/challengeAPI.js'
 import YouTube from "react-youtube";
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
@@ -19,7 +19,8 @@ function Challenges() {
         const fetchUsers = async () => {
             try {
                 let mapVideos = {};
-                const response = await axios.get('http://localhost:4000/api/v1/users');
+                const response = await getAllChallengers();
+                console.log("response ",response)
                 for (let user of response.data.data[0]) {
                     mapVideos[user.id] = '';
                 }
@@ -35,7 +36,8 @@ function Challenges() {
     useEffect(() => {
         const fetchLink = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/api/v1/challenges/?date=${date.toISOString().slice(0, 10)}`);
+                let querydate = date.toISOString().slice(0, 10);
+                const response = await getAllChallenges(querydate);
 
                 // Initialize videos object with empty strings for all users
                 let videos = {};

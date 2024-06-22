@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { getAllChallengers, uploadChallenges } from '../api/challengeAPI.js';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../css/videos.css';
@@ -14,8 +14,7 @@ function UploadVideos() {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/api/v1/users');
-                console.log("list of all users ", response.data.data[0]);
+                const response = await getAllChallengers();
                 setUsers(response.data.data[0]);
             } catch (error) {
                 console.error('Error fetching users:', error);
@@ -67,7 +66,7 @@ function UploadVideos() {
         };
     
         try {
-            await axios.post('http://localhost:4000/api/v1/challenges', payload);
+            await uploadChallenges(payload)
             alert('Videos uploaded successfully');
         } catch (error) {
             console.error('Error uploading videos:', error);

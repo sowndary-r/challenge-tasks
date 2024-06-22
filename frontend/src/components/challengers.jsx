@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import {addChallengers} from '../api/challengeAPI.js'
 import '../css/challengers.css';
-import axios from 'axios'
 function AddChallengers() {
   const [names, setNames] = useState([{ id: 1, name: '' }]);
   const [message, setMessage] = useState('');
@@ -40,10 +40,7 @@ function AddChallengers() {
     try {
     
       if(!(names.length===1 && !names[0].name)){
-        const response = await axios.post('http://localhost:4000/api/v1/users', {
-          challengers: names.map((n) => n.name),
-        });
-        console.log(response.data.message)
+        const response = await addChallengers(names)
         setApiMessage(response.data.message);
       }
 

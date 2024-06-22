@@ -14,6 +14,7 @@ router
 
 router
   .route('/users')
-  .post(userInfoRoutes.insertChallengers); 
+  .post(userInfoRoutes.insertChallengers)
+  .get(userInfoRoutes.getChallengers);
 
   module.exports = router;

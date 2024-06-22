@@ -12,7 +12,6 @@ const { insertVideos, getVideos} = require('../models/videos.model.js')
 async function getChallenges(req,res){
     try{
         let date = req.query.date;
-
         if(!date){
             res.status(500).json({
                 status: "Failure",
@@ -21,6 +20,7 @@ async function getChallenges(req,res){
         }
         const formattedDate = moment(date).format('YYYY-MM-DD');
         let data = await getVideos(formattedDate)
+     
         res.status(200).json({
             status: "success",
             data: data

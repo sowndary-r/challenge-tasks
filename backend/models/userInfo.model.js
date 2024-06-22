@@ -27,7 +27,17 @@ async function insertUserInfo(data){
         return null;
     }
 }
-
+async function getUserInfo(data){
+    try{
+        const resp = await sequelize.query('select id,userName from userInfo', {logging: false});
+        return resp;
+    }
+    catch(err){
+        logger.error("error getting data from userInfo table "+err.stack)
+        return null;
+    }
+}
 module.exports = {
-    insertUserInfo
+    insertUserInfo,
+    getUserInfo
 }

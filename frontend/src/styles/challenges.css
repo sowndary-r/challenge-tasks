@@ -14,6 +14,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     height: 350px; /* Fixed height for each card */
     overflow: hidden;
+    box-shadow:  inset 0 0 10px rgba(0, 0, 0, 0.2); 
 }
 
 .video-container {

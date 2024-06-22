@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {getAllChallengers, getAllChallenges} from '../middleware/api.js'
-import YouTube from "react-youtube";
-import { useNavigate } from 'react-router-dom';
+import { getAllChallengers, getAllChallenges } from '../middleware/api.js';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,13 +8,12 @@ import '../styles/challenges.css';
 
 function Challenges() {
     const [users, setUsers] = useState([]);
-    const [date, setDate] = useState(new Date()); 
+    const [date, setDate] = useState(new Date());
     const [videos, setVideos] = useState({});
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                let mapVideos = {};
                 const response = await getAllChallengers();
                 setUsers(response.data.data[0]);
             } catch (error) {
@@ -40,10 +37,9 @@ function Challenges() {
                 }
                 setVideos(videos);
             } catch (error) {
-                console.error('Error fetching users:', error);
+                console.error('Error fetching videos:', error);
             }
         };
-
         fetchLink();
     }, [date, users]);
 
@@ -63,9 +59,20 @@ function Challenges() {
         setDate(nextDate);
     };
 
+    const extractVideoId = (url) => {
+        if(url){
+        const regex = /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+        const match = url.match(regex);
+        return match ? match[1] : null;
+        }
+        else{
+            return ''
+        }
+    };
+
     return (
         <div className="challenges-container">
-             <h4 className="heading">Here is all the challenges!</h4>
+            <h4 className="heading">Here is all the challenges!</h4>
             <div className="date-picker">
                 <FontAwesomeIcon icon={faChevronLeft} onClick={handlePrevDay} />
                 <div className="date-picker-container">
@@ -81,10 +88,11 @@ function Challenges() {
                             <div className="video-container">
                                 <iframe
                                     title={`Video for ${user.userName}`}
-                                    width="80%"
-                                    height="80%"
-                                    src={videos[user.id]}
+                                    width="560"
+                                    height="315"
+                                    src={`https://www.youtube.com/embed/${extractVideoId(videos[user.id])}`}
                                     frameBorder="0"
+                                    allow="autoplay; encrypted-media"
                                     allowFullScreen
                                 ></iframe>
                             </div>
@@ -96,7 +104,6 @@ function Challenges() {
             </div>
         </div>
     );
-    
 }
 
 export default Challenges;

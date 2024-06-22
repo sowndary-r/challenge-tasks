@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import {addChallengers} from '../api/challengeAPI.js'
-import '../css/challengers.css';
+import {addChallengers} from '../middleware/api.js'
+import '../styles/challengers.css';
 function AddChallengers() {
   const [names, setNames] = useState([{ id: 1, name: '' }]);
   const [message, setMessage] = useState('');

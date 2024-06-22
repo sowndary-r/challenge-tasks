@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../css/userLogin.css';
+import '../styles/userLogin.css';
 import {
   MDBContainer,
   MDBCol,

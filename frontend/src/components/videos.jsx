@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getAllChallengers, uploadChallenges } from '../api/challengeAPI.js';
+import { getAllChallengers, uploadChallenges } from '../middleware/api.js';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import '../css/videos.css';
+import '../styles/videos.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 

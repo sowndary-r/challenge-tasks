@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getAllChallengers } from '../middleware/api.js';
 import '../styles/userLogin.css';
+import HomeNavBar from './homeNavbar';
 import {
   MDBContainer,
   MDBCol,
@@ -14,37 +16,43 @@ function UserLogin() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const authenticate = () => {
+  const authenticate = async () => {
 
-    const staticEmail = 'user@example.com';
-    const staticPassword = 'password123';
+    const staticEmail = 'test@gmail.com';
+    const staticPassword = '1234';
 
     if (email === staticEmail && password === staticPassword) {
-      navigate('/challengers'); // redirect to challengers page
+      let response = await getAllChallengers();
+      console.log( response.data.data[0])
+      response.data.data[0].length ==0 ?  navigate('/challengers') : navigate('/upload-videos')
     } else {
       alert('Invalid email or password');
     }
   };
 
   return (
+   
     <MDBContainer fluid className="p-3 my-5">
-      <MDBRow>
+       <HomeNavBar />
+    
+       <MDBRow>
+        
         <MDBCol col='10' md='6'>
           <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" className="img-fluid" alt="Phone image" />
         </MDBCol>
-        <MDBCol col='4' md='6'>
-          <MDBInput 
+        <MDBCol col='4' md='6' className='loginform'>
+           <h3 className='heading'>Login here!!</h3>
+          <input 
             wrapperClass='mb-4' 
             className="input-group" 
             placeholder='Email address' 
-            id='formControlLg' 
+            id='formControl' 
             type='email' 
-            size="lg"
+            size='lg'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <MDBInput 
-            wrapperClass='mb-4' 
+          <input 
             className="input-group" 
             placeholder='Password' 
             id='formControlLg' 
@@ -53,10 +61,14 @@ function UserLogin() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <MDBBtn onClick={authenticate} className="mb-4 w-100" size="lg">Login</MDBBtn>
+          <button className = "submitbtn" onClick={authenticate} >Login</button>
+    
         </MDBCol>
+       
       </MDBRow>
+    
     </MDBContainer>
+   
   );
 }
 

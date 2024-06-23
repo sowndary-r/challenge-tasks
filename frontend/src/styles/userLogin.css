@@ -6,13 +6,38 @@
   background: #eee;
 }
 
-.input-group .form-control{
-    display: flex;
-    align-items: center;
-    width: 100%; 
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); 
-    }
+.input-group {
+  width: 80%; /* Adjust width to 80% for a narrower input */
+  margin-bottom: 20px; /* Add some space between input fields */
+}
+
+.input-group .form-control {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+button {
+  border-radius: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  height: 100vh; 
+}
+
+.loginform {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+}

@@ -10,9 +10,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/challengers" element={<Challengers />} />
-        <Route path="/" element={<UserLogin />} />
-        <Route path="/challenges" element={<Challenges />} />
-        <Route path="/uploadVideos" element={<UploadVideos />} />
+        <Route path="/" element={<Challenges />} />
+        <Route path="/upload-videos" element={<UploadVideos />} />
+        <Route path="/admin-login" element={<UserLogin />} />
       </Routes>
     </Router>
   );

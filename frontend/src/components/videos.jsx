@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/videos.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import HomeNavBar from './homeNavbar.jsx';
 
 function UploadVideos() {
     const [date, setDate] = useState(new Date());
@@ -85,7 +86,9 @@ function UploadVideos() {
 
     return (
         <div className="challenges-container">
-             <h4 className="heading">Upload challenges!</h4>
+            <HomeNavBar/>
+            <h4 className='heading'>Upload challenge videos!</h4>
+            
             <div className="date-picker">
                 <FontAwesomeIcon icon={faChevronLeft} onClick={handlePrevDay} />
                 <div className="date-picker-container">
@@ -96,7 +99,7 @@ function UploadVideos() {
             <div className="users-list">
                 {users.map(user => (
                     <div key={user.id} className="user-input">
-                        <h3>{user.userName}</h3>
+                        <h3 className='userName'>{user.userName}</h3>
                         <input
                             type="text"
                             placeholder="Enter video link"
@@ -104,13 +107,14 @@ function UploadVideos() {
                             onChange={(e) => handleInputChange(user.id, e.target.value)}
                             className={!isValidUrl(videos[user.id]) && videos[user.id] ? 'invalid' : ''}
                         />
+                        <br />
                         {!isValidUrl(videos[user.id]) && videos[user.id] && (
-                            <p className="error-message">Not a valid link</p>
+                         <p className="error-message">Not a valid link</p>
                         )}
                     </div>
                 ))}
             </div>
-            <button onClick={handleSubmit}>Submit</button>
+            <button className = "submitbtn" onClick={handleSubmit}>Submit</button>
         </div>
     );
 }

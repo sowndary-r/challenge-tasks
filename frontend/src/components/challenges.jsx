@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import '../styles/challenges.css';
+import AdminNavBar from './adminNavbar';
 
 function Challenges() {
     const [users, setUsers] = useState([]);
@@ -72,7 +73,8 @@ function Challenges() {
 
     return (
         <div className="challenges-container">
-            <h4 className="heading">Here is all the challenges!</h4>
+             <AdminNavBar />
+            <h4 className='challengeTitle'>Welcome to 100 days 100 seconds challenge!!</h4>
             <div className="date-picker">
                 <FontAwesomeIcon icon={faChevronLeft} onClick={handlePrevDay} />
                 <div className="date-picker-container">
@@ -83,7 +85,7 @@ function Challenges() {
             <div className="users-grid">
                 {users.map((user, index) => (
                     <div key={index} className="user-card">
-                        <h3>{user.userName}</h3>
+                        <h4 className='userName'>{user.userName}</h4>
                         {videos[user.id] !== '' ? (
                             <div className="video-container">
                                 <iframe
@@ -97,7 +99,7 @@ function Challenges() {
                                 ></iframe>
                             </div>
                         ) : (
-                            <p>No video available</p>
+                            <p className='no-video'>Videos not yet uploaded</p>
                         )}
                     </div>
                 ))}

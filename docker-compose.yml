@@ -7,11 +7,13 @@ services:
       MYSQL_ROOT_PASSWORD: root1234
       MYSQL_DATABASE: challenge
       MYSQL_USER: root
-      MYSQL_PASSWORD: password
+      MYSQL_PASSWORD: root1234
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./backend/db_init:/docker-entrypoint-initdb.d  # Mount the db_init folder
+    command: --init-file /docker-entrypoint-initdb.d/db.sql  # Specify the init file to execute
 
   backend:
     build: ./backend

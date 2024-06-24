@@ -13,8 +13,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // db configuration
-const dbUrl = process.env.DB_CON || 'mysql://root:root1234@localhost:3306/challenge';
-const sequelize = new Sequelize(dbUrl)
+const dbUrl = process.env.DB_CON || 'mysql://root:root1234@mysql:3306/challenge';
+const sequelize = new Sequelize(dbUrl);
+
 sequelize
    .authenticate()
    .then(() => {
@@ -23,7 +24,8 @@ sequelize
    .catch(err => {
       logger.error("Unable to connect to the database " + err);
       process.exit();
-   }); 
+   });
+
 
   //routes
   app.use('/api/v1/',challengeRoutes);

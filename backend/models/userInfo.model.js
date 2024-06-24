@@ -27,7 +27,7 @@ async function insertUserInfo(data){
         return null;
     }
 }
-async function getUserInfo(data){
+async function getUserInfo(){
     try{
         const resp = await sequelize.query('select id,userName from userInfo', {logging: false});
         return resp;

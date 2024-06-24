@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
+    "jest": "^27.5.1",
     "mdb-react-ui-kit": "^8.0.0",
     "react": "^18.3.1",
     "react-datepicker": "^7.1.0",
@@ -22,7 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --watchAll --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "babel-jest": "^29.7.0"
   }
 }

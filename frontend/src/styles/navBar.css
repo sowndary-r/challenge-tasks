@@ -4,7 +4,7 @@
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: #fff; 
+    background: rgba(9,9,121,0.9);
     padding: 10px 20px; 
     border-radius: 5px; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); 
@@ -13,7 +13,7 @@
 .admin-nav a {
     text-decoration: none;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    color: darkblue;
+    color: white;
     font-weight: bold;
 }
 

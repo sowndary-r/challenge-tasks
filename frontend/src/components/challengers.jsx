@@ -2,22 +2,15 @@ import React, { useState } from 'react';
 import {addChallengers} from '../middleware/api.js'
 import {useNavigate} from 'react-router-dom';
 import '../styles/challengers.css';
+import HomeNavBar from './homeNavbar';
 function AddChallengers() {
   const [names, setNames] = useState([{ id: 1, name: '' }]);
   const [message, setMessage] = useState('');
-  const [apiMessage, setApiMessage] = useState('');
   const navigate = useNavigate();
-  const handleInputChange = (id, value, isEnter) => {
-    if (isEnter) {
-      setNames((prevNames) => [
-        ...prevNames,
-        { id: prevNames.length + 1, name: '' },
-      ]);
-    } else {
+  const handleInputChange = (id, value) => {
       setNames((prevNames) =>
         prevNames.map((n) => (n.id === id ? { ...n, name: value } : n))
       );
-    }
   };
 
   const handleAddChallenger = () => {
@@ -42,33 +35,28 @@ function AddChallengers() {
     
       if(!(names.length===1 && !names[0].name)){
         const response = await addChallengers(names)
-        setApiMessage(response.data.message);
         alert(response.data.message)
         navigate('/upload-videos')
       }
 
     } catch (error) {
       console.error('Error calling API:', error);
-      setApiMessage('Unable to add challengers. please try again later.');
       alert('Unable to add challengers. please try again later.')
     }
   };
 
   return (
     <div className="container">
+        <HomeNavBar/>
       <h4 className='heading'>Enter the challengers!</h4>
       {names.map((n, index) => (
         <div key={n.id} className="input-group mb-3">
           <input
             type="text"
             className="form-control"
+            maxLength="40"
             value={n.name}
-            onChange={(e) => handleInputChange(n.id, e.target.value, false)}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                handleInputChange(n.id, e.target.value, true);
-              }
-            }}
+            onChange={(e) => handleInputChange(n.id, e.target.value)}
             placeholder={`Enter challenger's Name ${index + 1}`}
           />
           {index !== 0 && (

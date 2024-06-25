@@ -24,7 +24,7 @@ function UserLogin() {
     if (email === staticEmail && password === staticPassword) {
       let response = await getAllChallengers();
       console.log( response.data.data[0])
-      response.data.data[0].length ==0 ?  navigate('/challengers') : navigate('/upload-videos')
+      response.data.data[0].length === 0 ?  navigate('/challengers') : navigate('/upload-videos')
     } else {
       alert('Invalid email or password');
     }
@@ -48,6 +48,7 @@ function UserLogin() {
             placeholder='Email address' 
             id='formControl' 
             type='email' 
+            maxLength="50"
             size='lg'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -56,7 +57,8 @@ function UserLogin() {
             className="input-group" 
             placeholder='Password' 
             id='formControlLg' 
-            type='password' 
+            type='password'
+            maxLength="20"
             size="lg"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

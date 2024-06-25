@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAllChallengers, uploadChallenges } from '../middleware/api.js';
+import { getAllChallengers, uploadChallenges, getAllChallenges } from '../middleware/api.js';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/videos.css';
@@ -24,27 +24,54 @@ function UploadVideos() {
         fetchUsers();
     }, []);
 
+    useEffect(() => {
+        const fetchLink = async () => {
+            try {
+                let querydate = date.toISOString().slice(0, 10);
+                const response = await getAllChallenges(querydate);
+                let videos = {};
+                for (let user of users) {
+                    videos[user.id] = '';
+                }
+                for (let data of response.data.data) {
+                    videos[data.id] = data.video;
+                }
+                setVideos(videos);
+            } catch (error) {
+                console.error('Error fetching videos:', error);
+            }
+        };
+        fetchLink();
+    }, [date, users]);
+
     const handleDateChange = (newDate) => {
         setDate(newDate);
     };
-    
+
     const handlePrevDay = () => {
         const prevDate = new Date(date);
         prevDate.setDate(date.getDate() - 1);
         setDate(prevDate);
     };
-    
+
     const handleNextDay = () => {
         const nextDate = new Date(date);
-        nextDate.setDate(date.getDate() + 1);
-        setDate(nextDate);
+        const today = new Date();
+        if (nextDate <= today) {
+            nextDate.setDate(date.getDate() + 1);
+            setDate(nextDate);
+        }
     };
 
     const handleInputChange = (userId, value) => {
-        setVideos(prevVideos => ({
-            ...prevVideos,
-            [userId]: value
-        }));
+        if (Object.values(videos).includes(value)) {
+            alert('This link has been already added')
+        } else {
+            setVideos(prevVideos => ({
+                ...prevVideos,
+                [userId]: value
+            }));
+        }
     };
 
     const handleSubmit = async () => {
@@ -55,44 +82,44 @@ function UploadVideos() {
                 userName: user.userName,
                 video: videos[user.id]
             }));
-    
+
         if (videoEntries.length === 0) {
             alert('Please enter at least one video link');
             return;
         }
-    
+
         const payload = {
             date: date.toISOString().slice(0, 10),
             videos: videoEntries
         };
-    
+
         try {
-            await uploadChallenges(payload)
+            await uploadChallenges(payload);
             alert('Videos uploaded successfully');
         } catch (error) {
             console.error('Error uploading videos:', error);
             alert('Failed to upload videos');
         }
     };
-    
+
     const isValidUrl = (string) => {
         try {
             new URL(string);
             return true;
         } catch (_) {
-            return false;  
+            return false;
         }
     };
 
     return (
         <div className="challenges-container">
-            <HomeNavBar/>
+            <HomeNavBar />
             <h4 className='heading'>Upload challenge videos!</h4>
-            
+
             <div className="date-picker">
                 <FontAwesomeIcon icon={faChevronLeft} onClick={handlePrevDay} />
                 <div className="date-picker-container">
-                    <DatePicker selected={date} onChange={handleDateChange} dateFormat="yyyy-MM-dd"  maxDate={new Date()}/>
+                    <DatePicker selected={date} onChange={handleDateChange} dateFormat="yyyy-MM-dd" maxDate={new Date()} />
                 </div>
                 <FontAwesomeIcon icon={faChevronRight} onClick={handleNextDay} />
             </div>
@@ -109,12 +136,12 @@ function UploadVideos() {
                         />
                         <br />
                         {!isValidUrl(videos[user.id]) && videos[user.id] && (
-                         <p className="error-message">Not a valid link</p>
+                            <p className="error-message">Not a valid link</p>
                         )}
                     </div>
                 ))}
             </div>
-            <button className = "submitbtn" onClick={handleSubmit}>Submit</button>
+            <button className="submitbtn" onClick={handleSubmit}>Submit</button>
         </div>
     );
 }

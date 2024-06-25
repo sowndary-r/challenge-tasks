@@ -78,7 +78,7 @@ function Challenges() {
             <div className="date-picker">
                 <FontAwesomeIcon icon={faChevronLeft} onClick={handlePrevDay} />
                 <div className="date-picker-container">
-                    <DatePicker selected={date} onChange={handleDateChange} dateFormat="yyyy-MM-dd" maxDate={new Date()} />
+                    <DatePicker selected={date} onChange={handleDateChange} dateFormat="yyyy-MM-dd" minDate="2024-06-01" maxDate= {new Date()} />
                 </div>
                 <FontAwesomeIcon icon={faChevronRight} onClick={handleNextDay} />
             </div>
